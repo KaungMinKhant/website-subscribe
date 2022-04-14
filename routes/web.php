@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\WebUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,8 @@ Route::get('/', function () {
 });
 Route::post('/website', [WebsiteController::class, 'store']);
 Route::post('/website/{id}/post', [PostController::class, 'store']);
+Route::post('/user', [WebUserController::class, 'store']);
+Route::post('/user/{user_id}/subscribe/website/{website_id}',
+            [WebUserController::class, 'subscribe']);
+Route::post('/emails/send',
+            [WebUserController::class, 'send_emails']);

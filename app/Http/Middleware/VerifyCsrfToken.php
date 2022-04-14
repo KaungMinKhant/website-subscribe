@@ -14,5 +14,8 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'website',
         'website/*/post',
+        'user',
+        'user/*/subscribe/website/*',
+        'emails/send',
     ];
 }
