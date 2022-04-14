@@ -1,0 +1,202 @@
+openapi: 3.0.0
+info:
+  version: "0.10"
+  title: "WEBSITE-POSTS-SUBSCRIBE"
+  contact:
+    name: "Kaung Min Khant"
+    email: "phenomenalkaung@gmail.com"
+
+tags:
+  - name: website-posts-subscribe
+    description: >-
+      Handles website-posts-subscribe requests. e.g. creating a post, website, user and subscribing to website
+
+servers:
+  - url: https://{your-own-host}/{route}
+    description: Your own deployment
+
+paths:
+  /website/{id}/post:
+    post:
+      description: |
+        Create a post for particular website
+      parameters:
+        - in: path
+          required: true
+          name: id
+          description: "Website ID to create a post"
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: "The name of the post"
+                  example: "Test Post"
+                description:
+                  type: string
+                  description: "The description of the post"
+                  example: "Test Post Description"
+      responses:
+        "200":
+          description: return message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: "A message saying the creation is successful."
+                    example: "Post is created."
+
+        "500":
+          description: Internal server error .
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {"error": "Internal server error"}
+    
+  /website:
+    post:
+      description: |
+        Create a website
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: "The name of the website"
+                  example: "Test Website"
+      responses:
+        "200":
+          description: return messages
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: "A message saying the creation is successful."
+                    example: "Website is created."
+
+        "500":
+          description: Internal server error .
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {"error": "Internal server error"}
+
+  /user:
+    post:
+      description: |
+        Create a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: "The name of the user"
+                  example: "Test User"
+      responses:
+        "200":
+          description: return messages
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: "A message saying the creation is successful."
+                    example: "User is created."
+
+        "500":
+          description: Internal server error .
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {"error": "Internal server error"}
+
+  /user/{user_id}/subscribe/website/{website_id}:
+    post:
+      description: |
+        Subscribe a user to a particular website
+      parameters:
+        - in: path
+          required: true
+          name: user_id
+          description: "User ID whom should subscribe to a website"
+          schema:
+            type: integer
+            example: 1
+        - in: path
+          required: true
+          name: website_id
+          description: "Website ID which a user should subscribe"
+          schema:
+            type: integer
+            example: 1
+      responses:
+        "200":
+          description: return messages
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: "A message saying the subscription is successful."
+                    example: "Subscription is successful"
+
+        "500":
+          description: Internal server error .
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {"error": "Internal server error"}
+  
+  /emails/send:
+    post:
+      description: |
+        Send users update about website posts
+      responses:
+        "200":
+          description: return messages
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: "A message saying the email sending is successful."
+                    example: "Emails has been sent."
+
+        "500":
+          description: Internal server error .
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {"error": "Internal server error"}
