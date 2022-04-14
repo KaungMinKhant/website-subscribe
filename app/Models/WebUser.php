@@ -10,6 +10,6 @@ class WebUser extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'subscribed_websites'
+        'name', 'subscribed_websites', 'email'
     ];
 }
