@@ -18,6 +18,7 @@ class CreateWebUsersTable extends Migration
             $table->timestamps();
             $table->string('name');
             $table->jsonb('subscribed_websites')->nullable();
+            $table->jsonb('seen_posts')->nullable();
             $table->string('email');
         });
     }

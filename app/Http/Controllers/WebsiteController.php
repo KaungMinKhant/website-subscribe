@@ -22,6 +22,6 @@ class WebsiteController extends Controller
         $website->save();
         return response()->json([
             'response' => "A website has been successfully created",
-        ]);
+        ], 200);
     }
 }
